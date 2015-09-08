@@ -1,2 +1,2 @@
-# JS
-THREE.js, processing.js, p5.js etc. playground
+# JavaScript Playground
+mostly learning sketches here...
