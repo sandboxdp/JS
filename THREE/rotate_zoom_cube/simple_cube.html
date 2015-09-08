@@ -1,0 +1,80 @@
+<!doctype html>
+
+
+<html>
+	<head>
+		<title>My first Three.js app</title>
+		<meta charset='utf-8'>
+	</head>
+	<body style='margin: 0;'>
+		<script src="js/three.min.js"></script>
+		<script src="js/OrbitControls.js"></script>
+		
+		<script>
+			// FROM THIS TUTORIAL: http://blog.teamtreehouse.com/the-beginners-guide-to-three-js
+			
+			// set up scene, camera and renderer as global variables.
+			var scene, camera, renderer;
+			init();
+			animate();
+			
+			// -------------------------------- SET UP SCENE ------------------------------------------
+			// set up the scene:
+			function init() {
+				// scene and the scene size:
+				scene = new THREE.Scene();
+				var WIDTH = window.innerWidth, HEIGHT = window.innerHeight;
+				
+				// create a renderer and add it to the DOM.
+				renderer = new THREE.WebGLRenderer({antialias:true});
+				renderer.setSize(WIDTH, HEIGHT);
+				document.body.appendChild( renderer.domElement );
+				
+				// create a camera, zoom it out from the model a bit, and add it to the scene.
+				camera = new THREE.PerspectiveCamera(45, WIDTH/HEIGHT,0.1,20000);
+				camera.position.set(0,6,0);
+				scene.add(camera);
+				
+				// create an event listener that resizes the renderer with the browser window:
+				window.addEventListener('resize',function() {
+					var WIDTH = window.innerWidth, HEIGHT = window.innerHeight;
+					renderer.setSize(WIDTH,HEIGHT);
+					camera.aspect = WIDTH/HEIGHT;
+					camera.updateProjectionMatrix();
+				});
+				
+				// set background color of scene:
+				renderer.setClearColor(0x333F47, 1);
+				
+				// create a light, set its position, and add it to the scene:
+				var light = new THREE.PointLight(0xffffff);
+				light.position.set(-100,200,100);
+				scene.add(light);
+				
+				// load in the mesh (cube?) and add it to the scene:
+				var geometry = new THREE.BoxGeometry(1,1,1);
+				var material = new THREE.MeshBasicMaterial({color: '#66CCFF', wireframe: true, opacity: 0.5});
+				var cube = new THREE.Mesh(geometry,material);
+				scene.add(cube);
+				
+				// add OrbitControls so that we can pan around with the mouse.
+				controls = new THREE.OrbitControls(camera, renderer.domElement);
+			}
+			// -------------------------------- EOF SET UP SCENE ------------------------------------------
+			
+			
+			// -------------------------------- ADD ANIMATION ---------------------------------------------
+			// add animation that renders the scene and updates the render as needed:
+			function animate() {
+				// check more info about requestAnimationFrame at: http://www.paulirish.com/2011/requestanimationframe-for-smart-animating/
+				requestAnimationFrame(animate);
+				
+				// render the scene:
+				renderer.render(scene,camera);
+				controls.update();				
+			}
+			// -------------------------------- EOF ADD ANIMATION ---------------------------------------------
+
+		</script>
+	</body>
+</html>
