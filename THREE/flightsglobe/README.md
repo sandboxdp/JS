@@ -7,7 +7,7 @@ Programming lanauges used here:
 ## Project Structure
 
 ```
-three_js_globe/
+flightsglobe/
 ├── dep_dest_to_json.py 		<<-- get lat/long from departure and destination from flights.csv
 ├── flight_data.json 			<<-- output produced by flights_csv_to_json.py
 ├── flight_data_dep_dest.json <<-- output produced by dep_dest_to_json.py
